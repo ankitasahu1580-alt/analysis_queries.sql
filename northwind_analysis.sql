@@ -15,7 +15,7 @@ FROM northwind_order_details;
 SELECT COUNT(DISTINCT order_id) AS Total_orders
 FROM northwind_orders;
 ---------------------------------------------------------------------------:
---3. calcu;ate the Average Order value:
+--3. calculate the Average Order value:
 
 SELECT SUM(unit_price *quantity *(1-discount)) 
 /COUNT(DISTINCT O.Order_id)AS Avg_orders_value
@@ -23,14 +23,14 @@ FROM northwind_order_details od
 JOIN northwind_orders o
 ON o.order_id=od.order_id;
 ----------------------------------------------------------------------------:
-4.Calculate the top 5 highest Revenue Orders:
+-- 4.Calculate the top 5 highest Revenue Orders:
 
 SELECT order_id,
 SUM(Unit_Price * quantity *(1 - discount)) AS Total_Revenue
 FROM northwind_order_details
 GROUP BY order_id order by Total_Revenue DESC LIMIT 5;
 
-5. which Country is generating the most revenue:
+-- 5. which Country is generating the most revenue?
 -----------------------------------------------------------------------------:
 
 SELECT ship_country,
@@ -41,7 +41,7 @@ ON o.order_id=od.order_id
 GROUP BY ship_country
 ORDER BY ship_country DESC;
 
-6. What is the month-wise trand?
+-- 6. What is the month-wise trand?
 -----------------------------------------------------------------------------:
 
 SELECT YEAR(order_date)AS Yearly,
@@ -53,7 +53,7 @@ ON o.order_id=od.order_id
 GROUP BY order_date
 ORDER BY order_date DESC;
 
-7. What is the impact of Discount on Revenue?
+-- 7. What is the impact of Discount on Revenue?
 ------------------------------------------------------------------------------:
 
 SELECT CASE WHEN discount>0 THEN "Discount" ELSE "NOdiscount" END AS Discount_type,
@@ -61,7 +61,7 @@ SUM(Unit_Price * quantity *(1 - discount)) AS Total_Revenue
 FROM northwind_order_details
 GROUP BY Discount_type;
 
-8. show the Top 10 Best-selling products:
+-- 8. show the Top 10 Best-selling products:
 --------------------------------------------------------------------------------:
 
 SELECT product_id,
@@ -71,7 +71,7 @@ FROM northwind_order_details
 GROUP BY product_id
 ORDER BY Total_Units_Sold DESC;
 
-9. Top 5 customer by revenue:
+-- 9. Top 5 customer by revenue:
 -------------------------------------------------------------------------------:
 
 SELECT o.customer_id,
@@ -82,7 +82,7 @@ ON o.order_id= od.order_id
 GROUP BY o.customer_id
 ORDER BY Total_Revenue DESC LIMIT 5;
 
-10. give the Revenue Ranking:
+-- 10. give the Revenue Ranking:
 --------------------------------------------------------------------------------:
 
 SELECT o.customer_id,
